@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import Todo from '../src/components/Todo/Todo'
 
 function App() {
   return (
-    <>
-    <h1>Todo APP</h1>
-    </>
+    <div style={{marginLeft: '40px'}}>
+      <Todo />
+    </div>
   );
 }
 
