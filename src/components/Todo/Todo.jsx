@@ -4,10 +4,9 @@ import { Input } from "../Input/Input";
 
 export default class Todo extends React.Component {
   state = {
-    todos: [
-      { id: createNewId(), text: "Learn HTML" },
-    ],
+    todos: [{ id: createNewId(), text: "Learn HTML" }],
     todoInput: "",
+    isDisable: true,
   };
 
   handleAddTodo = () => {
@@ -18,11 +17,20 @@ export default class Todo extends React.Component {
           { id: createNewId(), text: prevState.todoInput },
         ],
         todoInput: "",
+        isDisable: true,
       };
     });
   };
   handleInputChange = (e) => {
-    this.setState({ todoInput: e.target.value });
+      if(e.target.value.trim()){
+          this.setState({ todoInput: e.target.value, isDisable: false });
+        }else{
+            this.setState({ todoInput: '', isDisable: true });
+        }
+
+
+        
+
   };
   handleDeleteTodo = (id) => {
     this.setState((prevState) => {
@@ -33,13 +41,15 @@ export default class Todo extends React.Component {
   };
 
   render() {
-    const { todos, todoInput } = this.state;
+    const { todos, todoInput, isDisable } = this.state;
     return (
       <>
         <Input value={todoInput} onChange={this.handleInputChange} />
-        <button onClick={this.handleAddTodo}>ADD TODO</button>
+        <button disabled={isDisable} onClick={this.handleAddTodo}>
+          ADD TODO
+        </button>
         <ul>
-          {todos.map(({text,id}) => {
+          {todos.map(({ text, id }) => {
             return (
               <li key={id}>
                 <span>{text}</span>
