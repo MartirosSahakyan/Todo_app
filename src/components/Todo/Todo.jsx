@@ -1,7 +1,10 @@
 import React from "react";
 import { createNewId } from "../../helpers/helper";
+import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
+import { List } from "../List/List";
 import "./Todo.css";
+
 export default class Todo extends React.Component {
   state = {
     todos: [
@@ -33,9 +36,10 @@ export default class Todo extends React.Component {
       };
     });
   };
-  handleInputChange = (e) => {
-    if (e.target.value.trim()) {
-      this.setState({ todoInput: e.target.value, isDisable: false });
+
+  handleInputChange = ({ target: { value } }) => {
+    if (value.trim()) {
+      this.setState({ todoInput: value, isDisable: false });
     } else {
       this.setState({ todoInput: "", isDisable: true });
     }
@@ -64,6 +68,7 @@ export default class Todo extends React.Component {
       ),
     }));
   };
+
   handleSave = (id) => {
     this.setState(({ todos }) => ({
       todos: todos.map((todo) =>
@@ -71,6 +76,7 @@ export default class Todo extends React.Component {
       ),
     }));
   };
+
   handleItemInput = (id, e) => {
     this.setState(({ todos }) => ({
       todos: todos.map((todo) =>
@@ -78,44 +84,23 @@ export default class Todo extends React.Component {
       ),
     }));
   };
+
   render() {
     const { todos, todoInput, isDisable } = this.state;
 
     return (
       <>
         <Input value={todoInput} onChange={this.handleInputChange} />
-        <button disabled={isDisable} onClick={this.handleAddTodo}>
-          ADD TODO
-        </button>
-        <ul>
-          {todos.map(({ text, id, isComplete, isEdit }) => {
-            return (
-              <li key={id}>
-                {isEdit ? (
-                  <input
-                    onChange={(e) => this.handleItemInput(id, e)}
-                    value={text}
-                  />
-                ) : (
-                  <span
-                    onClick={() => this.handleComplete(id)}
-                    className={isComplete ? "checked" : "unChecked"}
-                  >
-                    {text}
-                  </span>
-                )}
-                {isEdit ? (
-                  <button onClick={() => this.handleSave(id)}>Save</button>
-                ) : (
-                  <button onClick={() => this.handleEdit(id)}>Edit</button>
-                )}
-                <button onClick={() => this.handleDeleteTodo(id)}>
-                  Delete
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <Button handleClick={this.handleAddTodo} text='Add Todo' isDisable={isDisable} />
+        <List 
+        todos={todos}
+        handleItemInput = {this.handleItemInput}
+        handleComplete = {this.handleComplete}
+        handleSave = {this.handleSave}
+        handleEdit = {this.handleEdit}
+        handleDeleteTodo = {this.handleDeleteTodo}
+        />
+        
       </>
     );
   }
