@@ -1,6 +1,3 @@
-import { Button } from "../Button/Button";
-import { Input } from "../Input/Input";
-
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
   return (

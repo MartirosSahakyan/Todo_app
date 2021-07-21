@@ -14,6 +14,12 @@ export default class Todo extends React.Component {
         isComplete: false,
         isEdit: false,
       },
+      {
+        id: createNewId(),
+        text: "Learn JS",
+        isComplete: true,
+        isEdit: false,
+      },
     ],
     todoInput: "",
   };
@@ -78,19 +84,22 @@ export default class Todo extends React.Component {
       ),
     }));
   };
+  
+  
 
   render() {
     const { todos, todoInput } = this.state;
     const isInputEmpty = !todoInput.trim()
     return (
       <>
+      <h1 className="mb-20 mt-3 text-5xl text-teal-600 underline font-mono text-lg ">Todo App</h1>
         <Input value={todoInput} onChange={this.handleInputChange} />
         <Button
           handleClick={this.handleAddTodo}
           text="Add Todo"
           isDisable={isInputEmpty}
         />
-        <button onClick={this.handleActiveTodos}>Active</button>
+        
         <List
           todos={todos}
           handleItemInput={this.handleItemInput}

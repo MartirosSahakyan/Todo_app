@@ -1,9 +1,9 @@
-import './App.css';
-import Todo from '../src/components/Todo/Todo'
+import "./App.css";
+import Todo from "../src/components/Todo/Todo";
 
 function App() {
   return (
-    <div style={{marginLeft: '40px'}}>
+    <div className="flex flex-col items-center h-screen bg-grey-300">
       <Todo />
     </div>
   );
