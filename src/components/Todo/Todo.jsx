@@ -16,7 +16,6 @@ export default class Todo extends React.Component {
       },
     ],
     todoInput: "",
-    isDisable: true,
   };
 
   handleAddTodo = () => {
@@ -26,23 +25,18 @@ export default class Todo extends React.Component {
           ...prevState.todos,
           {
             id: createNewId(),
-            text: prevState.todoInput,
+            text: prevState.todoInput.trim(),
             isComplete: false,
             isEdit: false,
           },
         ],
         todoInput: "",
-        isDisable: true,
       };
     });
   };
 
   handleInputChange = ({ target: { value } }) => {
-    if (value.trim()) {
-      this.setState({ todoInput: value, isDisable: false });
-    } else {
-      this.setState({ todoInput: "", isDisable: true });
-    }
+      this.setState({ todoInput: value});
   };
 
   handleDeleteTodo = (id) => {
@@ -86,21 +80,25 @@ export default class Todo extends React.Component {
   };
 
   render() {
-    const { todos, todoInput, isDisable } = this.state;
-
+    const { todos, todoInput } = this.state;
+    const isInputEmpty = !todoInput.trim()
     return (
       <>
         <Input value={todoInput} onChange={this.handleInputChange} />
-        <Button handleClick={this.handleAddTodo} text='Add Todo' isDisable={isDisable} />
-        <List 
-        todos={todos}
-        handleItemInput = {this.handleItemInput}
-        handleComplete = {this.handleComplete}
-        handleSave = {this.handleSave}
-        handleEdit = {this.handleEdit}
-        handleDeleteTodo = {this.handleDeleteTodo}
+        <Button
+          handleClick={this.handleAddTodo}
+          text="Add Todo"
+          isDisable={isInputEmpty}
         />
-        
+        <button onClick={this.handleActiveTodos}>Active</button>
+        <List
+          todos={todos}
+          handleItemInput={this.handleItemInput}
+          handleComplete={this.handleComplete}
+          handleSave={this.handleSave}
+          handleEdit={this.handleEdit}
+          handleDeleteTodo={this.handleDeleteTodo}
+        />
       </>
     );
   }
