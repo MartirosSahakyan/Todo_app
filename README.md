@@ -2,7 +2,7 @@
 
 Sample todo app built with the React using **Class Components*  
 
-For the live version, see **[]()**
+For the live version, see **[https://todo-app-martirossahakyan.vercel.app/](https://todo-app-martirossahakyan.vercel.app/)**
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
