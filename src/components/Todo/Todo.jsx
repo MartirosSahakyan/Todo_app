@@ -4,7 +4,7 @@ import { createNewId } from "../../helpers/helper";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { List } from "../List/List";
-import  "./Todo.css";
+import "./Todo.css";
 
 export default class Todo extends React.Component {
   state = localStorage.getItem("state")
@@ -97,32 +97,35 @@ export default class Todo extends React.Component {
         : filterStatus === status.COMPLETE
         ? todos.filter((todo) => todo.isComplete)
         : todos;
-        
+
     return (
-      <section className='container'>
+      <section className="container">
         <h1>Todo App</h1>
         <header>
-          <Input
-            value={todoInput}
-            onChange={this.handleInputChange}
-          />
+          <Input value={todoInput} onChange={this.handleInputChange} />
           <Button
-            className={['addBtn', isInputEmpty ? 'disableBtn' : 'enableBtn'].join(' ')}
+            className={[
+              "addBtn",
+              isInputEmpty ? "disableBtn" : "enableBtn",
+            ].join(" ")}
             handleClick={this.handleAddTodo}
             text="Add Todo"
             isDisable={isInputEmpty}
           />
         </header>
-        <div className='filterBtns-container'>
+        <div className="filterBtns-container">
           <Button
+            className="filterBtns active_filterBtn"
             handleClick={() => this.handleFilterButton(status.ALL)}
             text="All"
           />
           <Button
+            className="filterBtns"
             handleClick={() => this.handleFilterButton(status.ACTIVE)}
             text="Active"
           />
           <Button
+            className="filterBtns"
             handleClick={() => this.handleFilterButton(status.COMPLETE)}
             text="Complete"
           />
@@ -137,8 +140,6 @@ export default class Todo extends React.Component {
             handleDeleteTodo={this.handleDeleteTodo}
           />
         </main>
-
-        
       </section>
     );
   }
