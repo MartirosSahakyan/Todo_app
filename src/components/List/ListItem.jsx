@@ -1,4 +1,6 @@
-import './ListItem.css'
+import { Button } from "../Button/Button";
+import "./ListItem.css";
+
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
   return (
@@ -13,14 +15,13 @@ export function ListItem({ todo, handlers }) {
           {text}
         </span>
       )}
-      
-      {isEdit ? (
-        <button onClick={() => handlers.handleSave(id)}>Save</button>
-      ) : (
-        <button onClick={() => handlers.handleEdit(id)}>Edit</button>
-      )}
-      <button onClick={() => handlers.handleDeleteTodo(id)}>Delete</button>
 
+      {isEdit ? (
+        <Button text="Save" handleClick={() => handlers.handleSave(id)} />
+      ) : (
+        <Button text="Edit" handleClick={() => handlers.handleEdit(id)} />
+      )}
+      <Button text="Delete" handleClick={() => handlers.handleDeleteTodo(id)} />
     </li>
   );
 }
