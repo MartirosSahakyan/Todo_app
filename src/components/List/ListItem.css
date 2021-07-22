@@ -1,3 +1,9 @@
-/* .itemButtons{
-    margin-left: 10px;
-} */
+.checked{
+    text-decoration: line-through;
+}
+.unChecked{
+    text-decoration: none;
+}
+span:hover{
+    cursor:pointer;
+}
