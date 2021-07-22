@@ -29,14 +29,6 @@
   font-size: 20px;
   text-shadow: 1px 1px 1px #fff;
 }
-
-.todoList-input {
-  background-color: rgba(0, 0, 0, 0.02);
-  font-size: 20px;
-  outline: 0;
-  border: 0;
-}
-
 .todoBtns {
   border: 0;
   outline: 0;

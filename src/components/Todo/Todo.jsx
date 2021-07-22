@@ -1,5 +1,5 @@
 import React from "react";
-import { status } from "../../helpers/constants";
+import { inputTypes, status } from "../../helpers/constants";
 import { createNewId } from "../../helpers/helper";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
@@ -103,7 +103,11 @@ export default class Todo extends React.Component {
       <section className="container">
         <h1>Todo App</h1>
         <header>
-          <Input value={todoInput} onChange={this.handleInputChange} />
+          <Input
+            name={inputTypes.mainInput}
+            value={todoInput}
+            onChange={this.handleInputChange}
+          />
           <Button
             className={classNames(
               "addBtn",
@@ -120,7 +124,6 @@ export default class Todo extends React.Component {
             className={classNames("filterBtns", {
               active_filterBtn: filterStatus === status.ALL,
             })}
-            // className={filterStatus === status.ALL ? "filterBtns active_filterBtn" : 'filterBtns'}
             handleClick={() => this.handleFilterButton(status.ALL)}
             text="All"
           />

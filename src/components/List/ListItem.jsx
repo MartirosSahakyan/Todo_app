@@ -2,16 +2,18 @@ import { Button } from "../Button/Button";
 import PropTypes from "prop-types";
 import "./ListItem.css";
 import cn from "classnames";
+import { Input } from "../Input/Input";
+import { inputTypes } from "../../helpers/constants";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
   return (
     <li>
       {isEdit ? (
-        <input
-          className="todoList-input"
-          onChange={(e) => handlers.handleItemInput(id, e)}
+        <Input
+          name={inputTypes.todoInput}
           value={text}
+          onChange={(e) => handlers.handleItemInput(id, e)}
         />
       ) : (
         <span
