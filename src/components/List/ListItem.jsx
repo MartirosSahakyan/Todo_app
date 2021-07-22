@@ -1,28 +1,47 @@
 import { Button } from "../Button/Button";
-import "./ListItem.css";
+// import styles from "./ListItem.module.css";
 import PropTypes from "prop-types";
+import "./ListItem.css";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
   return (
     <li>
       {isEdit ? (
-        <input onChange={(e) => handlers.handleItemInput(id, e)} value={text} />
+        <input
+          className="todoList-input"
+          onChange={(e) => handlers.handleItemInput(id, e)}
+          value={text}
+        />
       ) : (
         <span
           onClick={() => handlers.handleComplete(id)}
-          className={isComplete ? "checked" : "unChecked"}
+          className={
+            isComplete ? "todoList-text checked" : "todoList-text unChecked"
+          }
         >
           {text}
         </span>
       )}
+      <Button
+        className="todoBtns deleteBtn"
+        text="Delete"
+        handleClick={() => handlers.handleDeleteTodo(id)}
+      />
 
       {isEdit ? (
-        <Button text="Save" handleClick={() => handlers.handleSave(id)} />
+        <Button
+          className="todoBtns saveBtn"
+          text="Save"
+          handleClick={() => handlers.handleSave(id)}
+        />
       ) : (
-        <Button text="Edit" handleClick={() => handlers.handleEdit(id)} />
+        <Button
+          className="todoBtns editBtn"
+          text="Edit"
+          handleClick={() => handlers.handleEdit(id)}
+        />
       )}
-      <Button text="Delete" handleClick={() => handlers.handleDeleteTodo(id)} />
     </li>
   );
 }

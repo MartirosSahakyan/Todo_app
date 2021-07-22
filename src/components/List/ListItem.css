@@ -1,9 +1,68 @@
-.checked{
-    text-decoration: line-through;
+.checked {
+  text-decoration: line-through;
 }
-.unChecked{
-    text-decoration: none;
+.unChecked {
+  text-decoration: none;
 }
-span:hover{
-    cursor:pointer;
+.todoList-container ul li {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 21px 20px;
+  box-shadow: inset 0 1px 1px #fff;
+  text-indent: 10px;
+}
+
+.todoList-container ul li button {
+  float: right;
+}
+
+.todoList-container ul li:hover {
+  border-left: 3px solid #ed6b3a;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.todoList-text:hover {
+  cursor: pointer;
+}
+.todoList-text {
+  padding: 20px 0px;
+  height: 100%;
+  font-size: 20px;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+.todoList-input {
+  background-color: rgba(0, 0, 0, 0.02);
+  font-size: 20px;
+  outline: 0;
+  border: 0;
+}
+
+.todoBtns {
+  border: 0;
+  outline: 0;
+  padding: 0;
+  transition: all 200ms ease-in;
+  color: #fff;
+  border-radius: 2px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+.deleteBtn {
+  background: rgb(167, 18, 18);
+}
+.deleteBtn:hover {
+  background: rgb(202, 40, 40);
+}
+
+.editBtn {
+  background: rgb(23, 127, 175);
+}
+.editBtn:hover {
+  background: rgb(42, 162, 218);
+}
+.saveBtn {
+  background: #7f8ff4;
+}
+.saveBtn:hover {
+  background: #6c7ff2;
 }
