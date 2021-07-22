@@ -7,25 +7,13 @@ import { List } from "../List/List";
 import "./Todo.css";
 
 export default class Todo extends React.Component {
-  state = {
-    todos: [
-      {
-        id: createNewId(),
-        text: "Learn HTML",
-        isComplete: false,
-        isEdit: false,
-      },
-      {
-        id: createNewId(),
-        text: "Learn JS",
-        isComplete: true,
-        isEdit: false,
-      },
-    ],
-    todoInput: "",
-    filterStatus: status.ALL,
-  };
-
+  state = localStorage.getItem("state")
+    ? JSON.parse(localStorage.getItem("state"))
+    : {
+        todos: [],
+        todoInput: "",
+        filterStatus: status.ALL,
+      };
   handleAddTodo = () => {
     this.setState((prevState) => {
       return {
@@ -90,6 +78,9 @@ export default class Todo extends React.Component {
   handleFilterButton = (status) => {
     this.setState({ filterStatus: status });
   };
+  componentDidUpdate() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
 
   render() {
     const { todos, todoInput, filterStatus } = this.state;
@@ -118,17 +109,17 @@ export default class Todo extends React.Component {
         </header>
         <div>
           <Button
-            handleClick={()=>this.handleFilterButton(status.ALL)}
+            handleClick={() => this.handleFilterButton(status.ALL)}
             text="All"
           />
           <Button
-            handleClick={()=>this.handleFilterButton(status.ACTIVE)}
+            handleClick={() => this.handleFilterButton(status.ACTIVE)}
             text="Active"
           />
           <Button
-            handleClick={()=>this.handleFilterButton(status.COMPLETE)}
+            handleClick={() => this.handleFilterButton(status.COMPLETE)}
             text="Complete"
-          />          
+          />
         </div>
         <main>
           <List
