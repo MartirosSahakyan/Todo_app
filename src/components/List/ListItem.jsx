@@ -1,5 +1,6 @@
 import { Button } from "../Button/Button";
 import "./ListItem.css";
+import PropTypes from "prop-types";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
@@ -25,3 +26,8 @@ export function ListItem({ todo, handlers }) {
     </li>
   );
 }
+
+ListItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  handlers: PropTypes.objectOf(PropTypes.func).isRequired,
+};

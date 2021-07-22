@@ -1,4 +1,5 @@
 import { ListItem } from "./ListItem";
+import PropTypes from "prop-types";
 
 export function List(props) {
   const { todos, ...handlers } = props;
@@ -10,3 +11,7 @@ export function List(props) {
     </ul>
   );
 }
+
+List.propTypes = {
+  todos: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
