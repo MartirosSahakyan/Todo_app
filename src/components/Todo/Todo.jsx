@@ -1,4 +1,5 @@
 import React from "react";
+import { status } from "../../helpers/constants";
 import { createNewId } from "../../helpers/helper";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
@@ -22,6 +23,7 @@ export default class Todo extends React.Component {
       },
     ],
     todoInput: "",
+    filterStatus: status.ALL,
   };
 
   handleAddTodo = () => {
@@ -42,7 +44,7 @@ export default class Todo extends React.Component {
   };
 
   handleInputChange = ({ target: { value } }) => {
-      this.setState({ todoInput: value});
+    this.setState({ todoInput: value });
   };
 
   handleDeleteTodo = (id) => {
@@ -84,31 +86,61 @@ export default class Todo extends React.Component {
       ),
     }));
   };
-  
-  
+
+  handleFilterButton = (status) => {
+    this.setState({ filterStatus: status });
+  };
 
   render() {
-    const { todos, todoInput } = this.state;
-    const isInputEmpty = !todoInput.trim()
+    const { todos, todoInput, filterStatus } = this.state;
+    const isInputEmpty = !todoInput.trim();
+    let filteredTodos =
+      filterStatus === status.ACTIVE
+        ? todos.filter((todo) => !todo.isComplete)
+        : filterStatus === status.COMPLETE
+        ? todos.filter((todo) => todo.isComplete)
+        : todos;
+
     return (
-      <>
-      <h1 className="mb-20 mt-3 text-5xl text-teal-600 underline font-mono text-lg ">Todo App</h1>
-        <Input value={todoInput} onChange={this.handleInputChange} />
-        <Button
-          handleClick={this.handleAddTodo}
-          text="Add Todo"
-          isDisable={isInputEmpty}
-        />
-        
-        <List
-          todos={todos}
-          handleItemInput={this.handleItemInput}
-          handleComplete={this.handleComplete}
-          handleSave={this.handleSave}
-          handleEdit={this.handleEdit}
-          handleDeleteTodo={this.handleDeleteTodo}
-        />
-      </>
+      <section>
+        <h1>Todo App</h1>
+        <header>
+          <Input
+            value={todoInput}
+            onChange={this.handleInputChange}
+            placeholder="add new todo"
+          />
+          <Button
+            handleClick={this.handleAddTodo}
+            text="Add Todo"
+            isDisable={isInputEmpty}
+          />
+        </header>
+        <div>
+          <Button
+            handleClick={()=>this.handleFilterButton(status.ALL)}
+            text="All"
+          />
+          <Button
+            handleClick={()=>this.handleFilterButton(status.ACTIVE)}
+            text="Active"
+          />
+          <Button
+            handleClick={()=>this.handleFilterButton(status.COMPLETE)}
+            text="Complete"
+          />          
+        </div>
+        <main>
+          <List
+            todos={filteredTodos}
+            handleItemInput={this.handleItemInput}
+            handleComplete={this.handleComplete}
+            handleSave={this.handleSave}
+            handleEdit={this.handleEdit}
+            handleDeleteTodo={this.handleDeleteTodo}
+          />
+        </main>
+      </section>
     );
   }
 }
