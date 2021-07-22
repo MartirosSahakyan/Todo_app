@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./Input.css";
+import "./Input.css";
 
 export function Input({ onChange, value, placeholder }) {
   return (
