@@ -5,6 +5,7 @@ import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { List } from "../List/List";
 import "./Todo.css";
+import classNames from "classnames";
 
 export default class Todo extends React.Component {
   state = localStorage.getItem("state")
@@ -104,10 +105,11 @@ export default class Todo extends React.Component {
         <header>
           <Input value={todoInput} onChange={this.handleInputChange} />
           <Button
-            className={[
+            className={classNames(
               "addBtn",
-              isInputEmpty ? "disableBtn" : "enableBtn",
-            ].join(" ")}
+              { disableBtn: isInputEmpty },
+              { enableBtn: !isInputEmpty }
+            )}
             handleClick={this.handleAddTodo}
             text="Add Todo"
             isDisable={isInputEmpty}
@@ -115,17 +117,24 @@ export default class Todo extends React.Component {
         </header>
         <div className="filterBtns-container">
           <Button
-            className="filterBtns active_filterBtn"
+            className={classNames("filterBtns", {
+              active_filterBtn: filterStatus === status.ALL,
+            })}
+            // className={filterStatus === status.ALL ? "filterBtns active_filterBtn" : 'filterBtns'}
             handleClick={() => this.handleFilterButton(status.ALL)}
             text="All"
           />
           <Button
-            className="filterBtns"
+            className={classNames("filterBtns", {
+              active_filterBtn: filterStatus === status.ACTIVE,
+            })}
             handleClick={() => this.handleFilterButton(status.ACTIVE)}
             text="Active"
           />
           <Button
-            className="filterBtns"
+            className={classNames("filterBtns", {
+              active_filterBtn: filterStatus === status.COMPLETE,
+            })}
             handleClick={() => this.handleFilterButton(status.COMPLETE)}
             text="Complete"
           />

@@ -1,7 +1,7 @@
 import { Button } from "../Button/Button";
-// import styles from "./ListItem.module.css";
 import PropTypes from "prop-types";
 import "./ListItem.css";
+import cn from "classnames";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
@@ -16,9 +16,11 @@ export function ListItem({ todo, handlers }) {
       ) : (
         <span
           onClick={() => handlers.handleComplete(id)}
-          className={
-            isComplete ? "todoList-text checked" : "todoList-text unChecked"
-          }
+          className={cn(
+            "todoList-text",
+            { checked: isComplete },
+            { unChecked: !isComplete }
+          )}
         >
           {text}
         </span>
