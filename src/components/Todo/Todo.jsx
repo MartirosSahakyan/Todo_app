@@ -78,8 +78,13 @@ export default class Todo extends React.Component {
   handleFilterButton = (status) => {
     this.setState({ filterStatus: status });
   };
+
   componentDidUpdate() {
-    localStorage.setItem("state", JSON.stringify(this.state));
+    try {
+      localStorage.setItem("state", JSON.stringify(this.state));
+    } catch (e) {
+      return;
+    }
   }
 
   render() {
