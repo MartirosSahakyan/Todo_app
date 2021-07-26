@@ -18,6 +18,7 @@ export function ListItem({ todo, handlers }) {
       ) : (
         <span
           onClick={() => handlers.handleComplete(id)}
+          onDoubleClick={() => handlers.handleTodoItemDoubleClick(id)}
           className={cn(
             "todoList-text",
             { checked: isComplete },

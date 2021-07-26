@@ -64,6 +64,14 @@ export default class Todo extends React.Component {
     }));
   };
 
+  handleTodoItemDoubleClick = (id) => {
+    this.setState(({ todos }) => ({
+      todos: todos.map((todo) =>
+        todo.id === id ? { ...todo, isEdit: true } : todo
+      ),
+    }));
+  };
+
   handleSave = (id) => {
     this.setState(({ todos }) => ({
       todos: todos.map((todo) =>
@@ -134,6 +142,7 @@ export default class Todo extends React.Component {
             handleSave={this.handleSave}
             handleEdit={this.handleEdit}
             handleDeleteTodo={this.handleDeleteTodo}
+            handleTodoItemDoubleClick={this.handleTodoItemDoubleClick}
           />
         </main>
       </section>
