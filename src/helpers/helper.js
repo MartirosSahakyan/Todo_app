@@ -10,4 +10,3 @@ const createNewId = () => {
 };
 
 export { createNewId };
-

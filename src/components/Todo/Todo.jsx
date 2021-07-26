@@ -1,5 +1,5 @@
 import React from "react";
-import { inputTypes, status } from "../../helpers/constants";
+import { INPUT_TYPES, STATUS } from "../../helpers/constants";
 import {
   createNewId,
   getLocalStorage,
@@ -10,12 +10,13 @@ import { Input } from "../Input/Input";
 import { List } from "../List/List";
 import "./Todo.css";
 import classNames from "classnames";
+import { FilterButtons } from "../FilterButtons/FilterButtons";
 
 export default class Todo extends React.Component {
   state = getLocalStorage() || {
     todos: [],
     todoInput: "",
-    filterStatus: status.ALL,
+    filterStatus: STATUS.ALL,
   };
 
   handleAddTodo = () => {
@@ -95,9 +96,9 @@ export default class Todo extends React.Component {
     const { todos, todoInput, filterStatus } = this.state;
     const isInputEmpty = !todoInput.trim();
     let filteredTodos =
-      filterStatus === status.ACTIVE
+      filterStatus === STATUS.ACTIVE
         ? todos.filter((todo) => !todo.isComplete)
-        : filterStatus === status.COMPLETE
+        : filterStatus === STATUS.COMPLETE
         ? todos.filter((todo) => todo.isComplete)
         : todos;
 
@@ -106,7 +107,7 @@ export default class Todo extends React.Component {
         <h1>Todo App</h1>
         <header>
           <Input
-            name={inputTypes.mainInput}
+            name={INPUT_TYPES.mainInput}
             value={todoInput}
             onChange={this.handleInputChange}
           />
@@ -121,29 +122,10 @@ export default class Todo extends React.Component {
             isDisable={isInputEmpty}
           />
         </header>
-        <div className="filterBtns-container">
-          <Button
-            className={classNames("filterBtns", {
-              active_filterBtn: filterStatus === status.ALL,
-            })}
-            handleClick={() => this.handleFilterButton(status.ALL)}
-            text="All"
-          />
-          <Button
-            className={classNames("filterBtns", {
-              active_filterBtn: filterStatus === status.ACTIVE,
-            })}
-            handleClick={() => this.handleFilterButton(status.ACTIVE)}
-            text="Active"
-          />
-          <Button
-            className={classNames("filterBtns", {
-              active_filterBtn: filterStatus === status.COMPLETE,
-            })}
-            handleClick={() => this.handleFilterButton(status.COMPLETE)}
-            text="Complete"
-          />
-        </div>
+        <FilterButtons
+          status={filterStatus}
+          handleClick={this.handleFilterButton}
+        />
         <main>
           <List
             todos={filteredTodos}

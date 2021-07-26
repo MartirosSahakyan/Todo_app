@@ -3,9 +3,9 @@ import Todo from "../src/components/Todo/Todo";
 
 function App() {
   return (
-    <div>
+    <>
       <Todo />
-    </div>
+    </>
   );
 }
 

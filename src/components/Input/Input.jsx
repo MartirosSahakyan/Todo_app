@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import "./Input.css";
 import cn from "classnames";
-import { inputTypes } from "../../helpers/constants";
+import { INPUT_TYPES } from "../../helpers/constants";
 export function Input({ onChange, value, placeholder, name }) {
   return (
     <input
       className={cn(
-        { mainInput: name === inputTypes.mainInput },
-        { todoListInput: name === inputTypes.todoInput }
+        { mainInput: name === INPUT_TYPES.mainInput },
+        { todoListInput: name === INPUT_TYPES.todoInput }
       )}
       type="text"
       name={name}

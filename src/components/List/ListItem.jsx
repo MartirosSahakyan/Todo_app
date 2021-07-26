@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./ListItem.css";
 import cn from "classnames";
 import { Input } from "../Input/Input";
-import { inputTypes } from "../../helpers/constants";
+import { INPUT_TYPES } from "../../helpers/constants";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
@@ -11,7 +11,7 @@ export function ListItem({ todo, handlers }) {
     <li>
       {isEdit ? (
         <Input
-          name={inputTypes.todoInput}
+          name={INPUT_TYPES.todoInput}
           value={text}
           onChange={(e) => handlers.handleItemInput(id, e)}
         />
