@@ -108,9 +108,11 @@ export default class Todo extends React.Component {
 
   render() {
     const { todos, todoInput, filterStatus } = this.state;
+
     const countAllTodos = todos.length;
     const countActiveTodos = todos.filter((todo) => !todo.isComplete).length;
     const isInputEmpty = !todoInput.trim();
+
     let filteredTodos =
       filterStatus === STATUS.ACTIVE
         ? todos.filter((todo) => !todo.isComplete)
