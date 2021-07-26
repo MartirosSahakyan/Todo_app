@@ -13,3 +13,13 @@
   list-style: none;
   padding: 0;
 }
+.list-footer{
+  border-top: 2px solid rgba(0, 0, 0, 0.3);
+  padding: 12px;
+}
+.clearCompleted{
+  float: right;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 17px;
+}

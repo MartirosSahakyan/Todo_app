@@ -9,9 +9,10 @@ export function List({ countActive, countAll, todos, ...handlers }) {
         {todos.map((todo) => {
           return <ListItem key={todo.id} todo={todo} handlers={handlers} />;
         })}
-        <li>
+        <div className="list-footer">
           <b>{countActive}</b> active / <b>{countAll}</b> All todos
-        </li>
+          <span className="clearCompleted">Clear all Completed</span>
+        </div>
       </ul>
     </div>
   );
