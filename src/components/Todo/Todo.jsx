@@ -92,6 +92,12 @@ export default class Todo extends React.Component {
     this.setState({ filterStatus: status });
   };
 
+  handleClearAllCompleted = () => {
+    this.setState(({ todos }) => ({
+      todos: todos.filter((todo) => !todo.isComplete),
+    }));
+  };
+
   componentDidUpdate() {
     try {
       setLocalStorage(this.state);
@@ -147,6 +153,7 @@ export default class Todo extends React.Component {
             handleEdit={this.handleEdit}
             handleDeleteTodo={this.handleDeleteTodo}
             handleTodoItemDoubleClick={this.handleTodoItemDoubleClick}
+            handleClearAllCompleted={this.handleClearAllCompleted}
           />
         </main>
       </section>

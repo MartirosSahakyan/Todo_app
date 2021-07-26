@@ -11,7 +11,12 @@ export function List({ countActive, countAll, todos, ...handlers }) {
         })}
         <div className="list-footer">
           <b>{countActive}</b> active / <b>{countAll}</b> All todos
-          <span className="clearCompleted">Clear all Completed</span>
+          <span
+            className="clearCompleted"
+            onClick={handlers.handleClearAllCompleted}
+          >
+            Clear all Completed
+          </span>
         </div>
       </ul>
     </div>
@@ -20,4 +25,7 @@ export function List({ countActive, countAll, todos, ...handlers }) {
 
 List.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  countActive: PropTypes.number.isRequired,
+  countAll: PropTypes.number.isRequired,
+  handlers: PropTypes.objectOf(PropTypes.func)
 };
