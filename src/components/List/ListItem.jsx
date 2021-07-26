@@ -4,9 +4,12 @@ import "./ListItem.css";
 import cn from "classnames";
 import { Input } from "../Input/Input";
 import { INPUT_TYPES } from "../../helpers/constants";
+import classNames from "classnames";
 
 export function ListItem({ todo, handlers }) {
   const { isEdit, text, isComplete, id } = todo;
+  const isInputEmpty = !text.trim();
+
   return (
     <li>
       {isEdit ? (
@@ -36,8 +39,13 @@ export function ListItem({ todo, handlers }) {
 
       {isEdit ? (
         <Button
-          className="todoBtns saveBtn"
+          className={classNames(
+            "todoBtns",
+            { disableBtn: isInputEmpty },
+            { saveBtn: !isInputEmpty }
+          )}
           text="Save"
+          isDisable={!Boolean(text)}
           handleClick={() => handlers.handleSave(id)}
         />
       ) : (
