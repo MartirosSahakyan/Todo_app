@@ -14,6 +14,7 @@ export function Input({ onChange, value, placeholder, name }) {
       onChange={onChange}
       value={value}
       placeholder={placeholder}
+      autoFocus={true}
     />
   );
 }
