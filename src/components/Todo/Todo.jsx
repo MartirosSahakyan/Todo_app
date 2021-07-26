@@ -1,6 +1,10 @@
 import React from "react";
 import { inputTypes, status } from "../../helpers/constants";
-import { createNewId } from "../../helpers/helper";
+import {
+  createNewId,
+  getLocalStorage,
+  setLocalStorage,
+} from "../../helpers/helper";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { List } from "../List/List";
@@ -8,13 +12,11 @@ import "./Todo.css";
 import classNames from "classnames";
 
 export default class Todo extends React.Component {
-  state = localStorage.getItem("state")
-    ? JSON.parse(localStorage.getItem("state"))
-    : {
-        todos: [],
-        todoInput: "",
-        filterStatus: status.ALL,
-      };
+  state = getLocalStorage() || {
+    todos: [],
+    todoInput: "",
+    filterStatus: status.ALL,
+  };
 
   handleAddTodo = () => {
     this.setState((prevState) => {
@@ -83,7 +85,7 @@ export default class Todo extends React.Component {
 
   componentDidUpdate() {
     try {
-      localStorage.setItem("state", JSON.stringify(this.state));
+      setLocalStorage(this.state);
     } catch (e) {
       return;
     }

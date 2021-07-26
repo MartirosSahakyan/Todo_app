@@ -1,13 +1,13 @@
-// function idGenerator() {
-//     let id = 0
-//     return () =>{
-//         return id+= 1
-//     }
-// }
-// const createNewId = idGenerator()
+export function setLocalStorage(state) {
+  localStorage.setItem("_state", JSON.stringify(state));
+}
+export function getLocalStorage() {
+  return JSON.parse(localStorage.getItem("_state"));
+}
 
 const createNewId = () => {
   return Date.now();
 };
 
 export { createNewId };
+
